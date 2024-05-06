@@ -112,3 +112,132 @@ def pitido():
     duracion_pitido = 1    # Duración del pitido en segundos
     simpleio.tone(buzzer, frecuencia_pitido, duration=duracion_pitido) #sonido
 
+#variables
+turno = 1
+goles_locales = 0
+goles_visita = 0
+    
+def juego(turno, goles_locales, goles_visita):
+    print(turno)
+    if turno == 1:
+        n = 5
+        gol = True
+        led.value = True
+        pitido()
+        contador = 2
+        led.value = False
+        
+        posicion = random.randint(1,3)
+        
+        while n>0:
+            if paleta1.value == True and posicion == 1:
+                gol = False
+            if paleta2.value == True and posicion == 1:
+                gol = False
+            if paleta3.value == True and posicion == 2:
+                gol = False
+            if paleta4.value == True and posicion == 2:
+                gol = False
+            if paleta5.value == True and posicion == 3:
+                gol = False
+            if paleta6.value == True and posicion == 3:
+                gol = False
+                
+            print(paleta1.value,paleta2.value, paleta3.value, paleta4.value, paleta5.value, paleta6.value)
+                
+            n = n-0.1
+            time.sleep(0.1)
+        
+        if posicion == 1:
+            led17.value = True
+            led16.value = True
+            time.sleep(3)
+            led17.value=False
+            led16.value=False
+        if posicion == 2:
+            led15.value = True
+            led14.value = True
+            time.sleep(3)
+            led15.value=False
+            led14.value=False
+        if posicion == 3:
+            led13.value = True
+            led12.value = True
+            time.sleep(3)
+            led13.value=False
+            led12.value=False
+            
+        if gol == True:
+            #gol(posicion, tiro)
+            goles_locales = goles_locales + 1
+            haaland()
+            haaland()
+            haaland()
+            turno = 2
+        else:
+            turno = 2
+  
+    if turno == 2:
+        print(turno)
+        n = 5
+        gol = True
+        pitido()
+        contador = 1
+        led2.value = True
+        time.sleep(3)
+        led2.value = False
+        
+        posicion = random.randint(1,3)
+        
+        while n>0:
+            if paleta1.value == True and posicion == 1:
+                gol = False
+                n=0
+            if paleta2.value == True and posicion == 1:
+                gol = False
+                n=0
+            if paleta3.value == True and posicion == 2:
+                gol = False
+                n=0
+            if paleta4.value == True and posicion == 2:
+                gol = False
+                n=0
+            if paleta5.value == True and posicion == 3:
+                gol = False
+                n=0
+            if paleta6.value == True and posicion == 3:
+                gol = False
+                n=0
+                
+            print(paleta1.value,paleta2.value, paleta3.value, paleta4.value, paleta5.value, paleta6.value)
+                
+            n = n-0.1
+            time.sleep(0.1)
+            
+        if posicion == 1:
+            led17.value = True
+            led16.value = True
+            time.sleep(3)
+            led17.value=False
+            led16.value=False
+        if posicion == 2:
+            led15.value = True
+            led14.value = True
+            time.sleep(3)
+            led15.value=False
+            led14.value=False
+        if posicion == 3:
+            led13.value = True
+            led12.value = True
+            time.sleep(3)
+            led13.value=False
+            led12.value=False
+         
+        if gol == True:
+            goles_visita = goles_visita + 1
+            haaland()
+            haaland()
+            haaland()
+            turno = 1
+        else:
+            turno = 1
