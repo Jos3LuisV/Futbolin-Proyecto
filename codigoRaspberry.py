@@ -111,7 +111,29 @@ def pitido():
     frecuencia_pitido = 3000  # Frecuencia del pitido en Hz
     duracion_pitido = 1    # Duración del pitido en segundos
     simpleio.tone(buzzer, frecuencia_pitido, duration=duracion_pitido) #sonido
-
+    
+def fracaso():
+    # Parámetros del sonido de fracaso
+    frecuencia_fracaso = 1000  # Frecuencia del sonido de fracaso en Hz
+    duracion_fracaso = 0.1  # Duración de cada tono del fracaso en segundos
+    
+    # Generar el sonido de fracaso
+    # Repetir el patrón tres veces
+    simpleio.tone(buzzer, frecuencia_fracaso, duration=duracion_fracaso)  # Reproducir tono de fracaso
+        
+    simpleio.tone(buzzer, frecuencia_fracaso, duration=duracion_fracaso+0.2)  # Reproducir tono de fracaso
+        
+    simpleio.tone(buzzer, frecuencia_fracaso, duration=duracion_fracaso+0.2)  # Reproducir tono de fracaso
+    
+def palo():
+    # Parámetros del golpe a metal
+    frecuencia_golpe = 3000  # Frecuencia del golpe en Hz
+    duracion_golpe = 0.05  # Duración del golpe en segundos
+    
+    # Generar el sonido del golpe a metal
+    simpleio.tone(buzzer, frecuencia_golpe, duration=duracion_golpe)
+        
+    
 #variables
 turno = 1
 goles_locales = 0
@@ -120,8 +142,8 @@ goles_visita = 0
 def juego(turno, goles_locales, goles_visita):
     print(turno)
     if turno == 1:
-        n = 5
-        gol = True
+        n = 3
+        gol = False
         led.value = True
         pitido()
         contador = 2
@@ -130,23 +152,54 @@ def juego(turno, goles_locales, goles_visita):
         posicion = random.randint(1,3)
         
         while n>0:
-            if paleta1.value == True and posicion == 1:
-                gol = False
-            if paleta2.value == True and posicion == 1:
-                gol = False
-            if paleta3.value == True and posicion == 2:
-                gol = False
-            if paleta4.value == True and posicion == 2:
-                gol = False
-            if paleta5.value == True and posicion == 3:
-                gol = False
-            if paleta6.value == True and posicion == 3:
-                gol = False
+            if paleta1.value == True:
+                gol = True
+                palo()
+                led.value = True
+                
+                if posicion == 1:
+                    gol = False
+            if paleta2.value == True:
+                gol = True
+                palo()
+                led.value = True
+                
+                if posicion == 1:
+                    gol = False
+            if paleta3.value == True:
+                gol = True
+                palo()
+                led.value = True
+                
+                if posicion == 2:
+                    gol = False
+            if paleta4.value == True:
+                gol = True
+                palo()
+                led.value = True
+                
+                if posicion == 2:
+                    gol = False
+            if paleta5.value == True:
+                gol = True
+                palo()
+                led.value = True
+                
+                if posicion == 3:
+                    gol = False
+            if paleta6.value == True:
+                gol = True
+                palo()
+                led.value = True
+                
+                if posicion == 3:
+                    gol = False
                 
             print(paleta1.value,paleta2.value, paleta3.value, paleta4.value, paleta5.value, paleta6.value)
-                
+            
             n = n-0.1
             time.sleep(0.1)
+            led.value=False
         
         if posicion == 1:
             led17.value = True
@@ -170,49 +223,86 @@ def juego(turno, goles_locales, goles_visita):
         if gol == True:
             #gol(posicion, tiro)
             goles_locales = goles_locales + 1
+            led17.value=True
+            led16.value=True
+            led15.value=True
+            led14.value=True
+            led13.value=True
+            led12.value=True
             haaland()
             haaland()
             haaland()
+            led17.value=False
+            led16.value=False
+            led15.value=False
+            led14.value=False
+            led13.value=False
+            led12.value=False
             turno = 2
         else:
+            fracaso()
+            time.sleep(5)
             turno = 2
   
     if turno == 2:
         print(turno)
-        n = 5
-        gol = True
-        pitido()
+        n = 3
+        gol = False
         contador = 1
         led2.value = True
-        time.sleep(3)
+        pitido()
         led2.value = False
         
         posicion = random.randint(1,3)
         
         while n>0:
-            if paleta1.value == True and posicion == 1:
-                gol = False
-                n=0
-            if paleta2.value == True and posicion == 1:
-                gol = False
-                n=0
-            if paleta3.value == True and posicion == 2:
-                gol = False
-                n=0
-            if paleta4.value == True and posicion == 2:
-                gol = False
-                n=0
-            if paleta5.value == True and posicion == 3:
-                gol = False
-                n=0
-            if paleta6.value == True and posicion == 3:
-                gol = False
-                n=0
+            if paleta1.value == True:
+                gol = True
+                palo()
+                led2.value = True
+                
+                if posicion == 1:
+                    gol = False
+            if paleta2.value == True:
+                gol = True
+                palo()
+                led2.value = True
+                
+                if posicion == 1:
+                    gol = False
+            if paleta3.value == True:
+                gole = True
+                palo()
+                led2.value = True
+                
+                if posicion == 2:
+                    gol = False
+            if paleta4.value == True:
+                gol = True
+                palo()
+                led2.value = True
+            
+                if posicion == 2:
+                    gol = False
+            if paleta5.value == True:
+                gol = True
+                palo()
+                led2.value = True
+                
+                if posicion == 3:
+                    gol = False
+            if paleta6.value == True:
+                gol = True
+                palo()
+                led2.value = True
+                if posicion == 3:
+                    gol = False
                 
             print(paleta1.value,paleta2.value, paleta3.value, paleta4.value, paleta5.value, paleta6.value)
                 
             n = n-0.1
             time.sleep(0.1)
+            led2.value=False
             
         if posicion == 1:
             led17.value = True
@@ -235,9 +325,47 @@ def juego(turno, goles_locales, goles_visita):
          
         if gol == True:
             goles_visita = goles_visita + 1
+            led17.value=True
+            led16.value=True
+            led15.value=True
+            led14.value=True
+            led13.value=True
+            led12.value=True
             haaland()
             haaland()
             haaland()
+            led17.value=False
+            led16.value=False
+            led15.value=False
+            led14.value=False
+            led13.value=False
+            led12.value=False
             turno = 1
         else:
+            fracaso()
+            time.sleep(5)
             turno = 1
+            
+
+pitido()
+time.sleep(5)   
+while True:
+    juego(turno, goles_locales, goles_visita)
+    
+    
+#Intento de ftp... no funciona a pesar de que teoricamente esta bien
+#import adafruit_requests as requests   # Biblioteca para realizar solicitudes HTTP y FTP
+
+# Establecer la URL del servidor FTP
+#ftp_url = "ftp://user1:Emvjdm10*@192.168.0.162/Users/emora/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/server"
+
+# Crear un objeto de sesión FTP
+#ftp = requests.Session(ftp_url)
+
+# Subir un archivo al servidor FTP
+#with open("servidor_txt.txt", "rb") as archivo:
+ #   ftp.put(ftp_url, archivo, "archivo_en_servidor.txt")
+
+
+# Cerrar la sesión FTP
+#ftp.close()
